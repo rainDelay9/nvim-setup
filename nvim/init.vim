@@ -7,6 +7,7 @@ set modifiable
 set mouse=a
 autocmd vimenter * ++nested colorscheme gruvbox
 
+let g:rustfmt_autosave=1
 let NERDTreeShowHidden=1
 
 " Set completeopt to have a better completion experience
