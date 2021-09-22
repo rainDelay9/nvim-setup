@@ -7,7 +7,48 @@ set modifiable
 set mouse=a
 autocmd vimenter * ++nested colorscheme gruvbox
 
+" Completion
+"-- Better completion
+"-- menuone: popup even when there's only one match
+"-- noinsert: Do not insert text until a selection is made
+"-- noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+
+"-- Better display for messages
+set cmdheight=2
+"-- You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+"-- Proper search
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+
+set guioptions-=T 
+set vb t_vb=
+set backspace=2
+set nofoldenable
+set ttyfast
+set lazyredraw
+set synmaxcol=500
+set laststatus=2
+set relativenumber
+set number 
+set diffopt+=iwhite 
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+" set colorcolumn=80 
+set showcmd 
+set shortmess+=c 
+
+let g:rustfmt_autosave=1
 let NERDTreeShowHidden=1
+
+if has("autocmd")
+  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 
 " Set completeopt to have a better completion experience
 " " :help completeopt
@@ -39,6 +80,11 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nmap <leader>w :w<CR>
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "<C-n>" : "<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
+
 " " Configure LSP
 " " https://github.com/neovim/nvim-lspconfig#rust_analyzer
 if has('nvim')
@@ -61,5 +107,8 @@ end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach   })
+
+
+-- autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true  }
 
 EOF
