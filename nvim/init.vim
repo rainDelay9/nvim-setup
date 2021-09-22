@@ -7,6 +7,7 @@ set modifiable
 set mouse=a
 autocmd vimenter * ++nested colorscheme gruvbox
 
+<<<<<<< HEAD
 " Completion
 "-- Better completion
 "-- menuone: popup even when there's only one match
@@ -42,6 +43,8 @@ set diffopt+=indent-heuristic
 set showcmd 
 set shortmess+=c 
 
+=======
+>>>>>>> 31c6aac3441f9530909c900fbd45c8b7c6ff498e
 let g:rustfmt_autosave=1
 let NERDTreeShowHidden=1
 
